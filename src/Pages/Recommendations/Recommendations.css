@@ -1,0 +1,6 @@
+.recommendationsContainer{
+  margin-top: 20px;
+  padding:50px;
+  overflow: auto;
+  max-height: 70%;
+}

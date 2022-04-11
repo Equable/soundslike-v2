@@ -1,5 +1,8 @@
-import Home from './Home/Home'
-
+import CorePage from './CorePage/CorePage'
+import SearchPage from './Search/SearchPage'
+import Recommendations from './Recommendations/Recommendations'
 export {
-  Home
+  CorePage,
+  SearchPage,
+  Recommendations
 }
