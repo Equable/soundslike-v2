@@ -23,7 +23,11 @@
     "paths": {
       "Pages/*":["Pages/*"],
       "Components/*": ["Components/*"]
-    }
+    },
+    "types": [
+      "react/next",
+      "react-dom/next"
+    ]
   },
   "include": [
     "src"

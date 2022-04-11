@@ -1,0 +1,6 @@
+.resultsContainer{
+  margin-top: 20px;
+  padding:50px;
+  max-height: 70%;
+  overflow:auto;
+}
