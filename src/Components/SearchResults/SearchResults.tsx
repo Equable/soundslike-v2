@@ -19,6 +19,7 @@ interface Props {}
 const useStyles = createStyles(() => ({
   gridTrack: {
     backgroundColor: "#080808",
+    minHeight:260
   },
 }));
 
@@ -40,7 +41,7 @@ const SearchResults: FunctionComponent<Props> = () => {
   const generateTrackResults = () => {
     const tracks = searchResults?.items.map((track) => {
       return (
-        <Grid.Col xl={3} lg={4} md={4} sm={6} xs={12}>
+        <Grid.Col xl={3} lg={4} md={4} sm={6} xs={12} key={`track_${track.id}`}>
           <Grid
             classNames={{ root: classes.gridTrack }}
             className="tile"
@@ -52,16 +53,18 @@ const SearchResults: FunctionComponent<Props> = () => {
               </AspectRatio>
             </Grid.Col>
             <Grid.Col span={6}>
-              <Grid>
+              <Grid style={{ minHeight: "100%"}} align="flex-start">
                 <Grid.Col span={12}>
-                  <Text size="xl" weight={"bold"}>
+                  <Text weight={"bold"}>
                     {track.artists[0].name}
                   </Text>
                 </Grid.Col>
-                <Grid.Col span={12}>
-                  <Text>{track.name}</Text>
+                <Grid.Col span={12} style={{height:80}}>
+                  <Text size="sm">
+                    {track.name}
+                  </Text>
                 </Grid.Col>
-                <Grid.Col>
+                <Grid.Col style={{ alignSelf: "flex-end", padding:0 }}>
                   Play on:&nbsp;
                   <Anchor href={track?.external_urls?.spotify} target="_blank">
                     Web
@@ -71,8 +74,8 @@ const SearchResults: FunctionComponent<Props> = () => {
                     App
                   </Anchor>
                 </Grid.Col>
-                <Grid.Col>
-                  <Group>
+                <Grid.Col style={{ alignSelf: "flex-end", padding:0}}>
+                  <Group position="left">
                     <Button onClick={onSelectTrack(track)}>Select</Button>
                   </Group>
                 </Grid.Col>

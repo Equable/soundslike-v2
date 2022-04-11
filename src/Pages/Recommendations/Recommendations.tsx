@@ -35,7 +35,7 @@ const Recommendations: FunctionComponent<Props> = () => {
   const generateTrackResults = () => {
     const tracks = recommendations?.map((track) => {
       return (
-        <Grid.Col xl={3} lg={4} md={4} sm={6} xs={12}>
+        <Grid.Col xl={3} lg={4} md={4} sm={6} xs={12} key={`track_${track.id}`}>
           <Grid
             classNames={{ root: classes.gridTrack }}
             className="tile"
@@ -47,16 +47,14 @@ const Recommendations: FunctionComponent<Props> = () => {
               </AspectRatio>
             </Grid.Col>
             <Grid.Col span={6}>
-              <Grid>
+              <Grid style={{ minHeight: "100%" }} align="flex-start">
                 <Grid.Col span={12}>
-                  <Text size="xl" weight={"bold"}>
-                    {track.artists[0].name}
-                  </Text>
+                  <Text weight={"bold"}>{track.artists[0].name}</Text>
                 </Grid.Col>
-                <Grid.Col span={12}>
-                  <Text>{track.name}</Text>
+                <Grid.Col span={12} style={{ height: 80 }}>
+                  <Text size="sm">{track.name}</Text>
                 </Grid.Col>
-                <Grid.Col>
+                <Grid.Col style={{ alignSelf: "flex-end", padding: 0 }}>
                   Play on:&nbsp;
                   <Anchor href={track?.external_urls?.spotify} target="_blank">
                     Web
