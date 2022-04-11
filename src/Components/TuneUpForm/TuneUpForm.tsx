@@ -108,11 +108,13 @@ const TuneUpForm: FunctionComponent<Props> = () => {
                   <Text>{selectedTrack?.name}</Text>
                 </Grid.Col>
                 <Grid.Col span={12}>
-                  <Anchor
-                    href={selectedTrack?.external_urls?.spotify}
-                    target="_blank"
-                  >
-                    Open In Spotify
+                  Play on:&nbsp;
+                  <Anchor href={selectedTrack?.external_urls?.spotify} target="_blank">
+                    Web
+                  </Anchor>
+                  &nbsp;|&nbsp;
+                  <Anchor href={selectedTrack?.uri} target="_blank">
+                    App
                   </Anchor>
                 </Grid.Col>
               </Grid>
@@ -138,7 +140,7 @@ const TuneUpForm: FunctionComponent<Props> = () => {
                   });
                 }
               );
-              navigate('/results');
+              navigate("/results");
             }
           )}
         >

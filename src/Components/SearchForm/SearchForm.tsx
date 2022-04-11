@@ -4,12 +4,14 @@ import { IconSearch } from "@tabler/icons";
 import { useSpotifyContext } from "Context/SpotifyContext/SpotifyContext";
 import { SPOTIFY_CONTEXT_ACTIONS } from "Context/SpotifyContext/SpotifyContextReducer";
 import { FunctionComponent } from "react";
+import { useNavigate } from "react-router-dom";
 import SpotifyService, {
   SpotifySearchOptions,
 } from "utils/services/SpotifyService";
 
 interface Props {}
 const SpotifySearchForm: FunctionComponent<Props> = () => {
+  const navigate = useNavigate();
   const { state, dispatch } = useSpotifyContext();
   const { token } = state;
   const searchForm = useForm({
@@ -18,6 +20,11 @@ const SpotifySearchForm: FunctionComponent<Props> = () => {
       type: "track",
     } as Partial<SpotifySearchOptions>,
   });
+
+    const onStartOver = () => {
+      dispatch({ type: SPOTIFY_CONTEXT_ACTIONS.RESET, payload: null });
+      navigate("/");
+    };
 
   // Will use for advanced search functionality later
   // const generateTypeButtons = () => {
@@ -53,6 +60,7 @@ const SpotifySearchForm: FunctionComponent<Props> = () => {
             {generateTypeButtons()}
           </RadioGroup> */}
         <Group position="right" mt="md">
+          <Button type="button" onClick={onStartOver}>Clear</Button>
           <Button type="submit">Search</Button>
         </Group>
       </form>
