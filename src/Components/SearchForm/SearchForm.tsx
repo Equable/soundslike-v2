@@ -52,6 +52,7 @@ const SpotifySearchForm: FunctionComponent<Props> = () => {
         <Title>Search</Title>
         <TextInput
           required
+          size="md"
           placeholder="What song do you want more of..."
           icon={<IconSearch />}
           {...searchForm.getInputProps("q")}
