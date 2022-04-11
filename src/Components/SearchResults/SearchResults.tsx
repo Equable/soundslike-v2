@@ -37,7 +37,7 @@ const SearchResults: FunctionComponent<Props> = () => {
   const generateTrackResults = () => {
     const tracks = searchResults?.items.map((track) => {
       return (
-        <Grid.Col span={3}>
+        <Grid.Col xl={3} lg={4} md={4} sm={6} xs={12}>
           <Grid
             classNames={{ root: classes.gridTrack }}
             className="tile"
@@ -59,8 +59,13 @@ const SearchResults: FunctionComponent<Props> = () => {
                   <Text>{track.name}</Text>
                 </Grid.Col>
                 <Grid.Col>
+                  Play on:&nbsp;
                   <Anchor href={track?.external_urls?.spotify} target="_blank">
-                    Open In Spotify
+                    Web
+                  </Anchor>
+                  &nbsp;|&nbsp;
+                  <Anchor href={track?.uri} target="_blank">
+                    App
                   </Anchor>
                 </Grid.Col>
                 <Grid.Col>
