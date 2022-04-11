@@ -1,4 +1,4 @@
-import TuneUpForm from "Components/TuneUpForm/TuneUpForm";
+import {TuneUpForm} from "Components";
 import { useSpotifyContext } from "Context/SpotifyContext/SpotifyContext";
 import { SPOTIFY_CONTEXT_ACTIONS } from "Context/SpotifyContext/SpotifyContextReducer";
 import { FunctionComponent, useEffect } from "react";

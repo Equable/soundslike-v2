@@ -8,6 +8,7 @@ import {
   Image,
   Text,
 } from "@mantine/core";
+import { AlbumCard } from "Components";
 import { useSpotifyContext } from "Context/SpotifyContext/SpotifyContext";
 import { SPOTIFY_CONTEXT_ACTIONS } from "Context/SpotifyContext/SpotifyContextReducer";
 import { FunctionComponent } from "react";
@@ -24,7 +25,6 @@ const useStyles = createStyles(() => ({
 
 const Recommendations: FunctionComponent<Props> = () => {
   const navigate = useNavigate();
-  const { classes } = useStyles();
   const { state, dispatch } = useSpotifyContext();
   const { recommendations } = state;
 
@@ -35,39 +35,7 @@ const Recommendations: FunctionComponent<Props> = () => {
   const generateTrackResults = () => {
     const tracks = recommendations?.map((track) => {
       return (
-        <Grid.Col xl={3} lg={4} md={4} sm={6} xs={12} key={`track_${track.id}`}>
-          <Grid
-            classNames={{ root: classes.gridTrack }}
-            className="tile"
-            align="stretch"
-          >
-            <Grid.Col span={6}>
-              <AspectRatio ratio={640 / 640}>
-                <Image src={track?.album?.images[0]?.url} />
-              </AspectRatio>
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Grid style={{ minHeight: "100%" }} align="flex-start">
-                <Grid.Col span={12}>
-                  <Text weight={"bold"}>{track.artists[0].name}</Text>
-                </Grid.Col>
-                <Grid.Col span={12} style={{ height: 80 }}>
-                  <Text size="sm">{track.name}</Text>
-                </Grid.Col>
-                <Grid.Col style={{ alignSelf: "flex-end", padding: 0 }}>
-                  Play on:&nbsp;
-                  <Anchor href={track?.external_urls?.spotify} target="_blank">
-                    Web
-                  </Anchor>
-                  &nbsp;|&nbsp;
-                  <Anchor href={track?.uri} target="_blank">
-                    App
-                  </Anchor>
-                </Grid.Col>
-              </Grid>
-            </Grid.Col>
-          </Grid>
-        </Grid.Col>
+        <AlbumCard track={track} hideButton />
       );
     });
     return tracks;
@@ -75,9 +43,9 @@ const Recommendations: FunctionComponent<Props> = () => {
   return (
     <CorePage>
       <div className="recommendationsContainer">
-        <Grid gutter="xl">{generateTrackResults()}</Grid>
+        <Grid gutter="xl" style={{height:"100%"}}>{generateTrackResults()}</Grid>
       </div>
-      <Group position="right" mt="md">
+      <Group position="right" mt="md" style={{padding:'10px', paddingRight:"50px"}}>
         <Button onClick={onStartOver}>Start Over</Button>
       </Group>
     </CorePage>

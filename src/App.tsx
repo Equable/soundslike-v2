@@ -19,7 +19,9 @@ const App = () => {
             "#1DB954",
             "#1DB954",
             "#1DB954",
+            "#1DB954",
           ],
+          spotifyTileDark: ["#080808"],
         },
         primaryColor: "brand",
       }}

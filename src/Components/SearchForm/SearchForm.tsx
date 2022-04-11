@@ -21,10 +21,10 @@ const SpotifySearchForm: FunctionComponent<Props> = () => {
     } as Partial<SpotifySearchOptions>,
   });
 
-    const onStartOver = () => {
-      dispatch({ type: SPOTIFY_CONTEXT_ACTIONS.RESET, payload: null });
-      navigate("/");
-    };
+  const onStartOver = () => {
+    dispatch({ type: SPOTIFY_CONTEXT_ACTIONS.RESET, payload: null });
+    navigate("/");
+  };
 
   // Will use for advanced search functionality later
   // const generateTypeButtons = () => {
@@ -38,15 +38,23 @@ const SpotifySearchForm: FunctionComponent<Props> = () => {
   //   return RadioButtons;
   // };
   return (
-    <Container size="xl">
+    <Container
+      size="md"
+      style={{
+        marginTop: 20,
+      }}
+    >
       <form
         onSubmit={searchForm.onSubmit(({ q, type }) => {
           SpotifyService.search(
             { q, type } as SpotifySearchOptions,
             token as string
-          ).then(result => {
-            dispatch({payload: {searchResults: result}, type: SPOTIFY_CONTEXT_ACTIONS.SET_SEARCH_RESULTS})
-          })
+          ).then((result) => {
+            dispatch({
+              payload: { searchResults: result },
+              type: SPOTIFY_CONTEXT_ACTIONS.SET_SEARCH_RESULTS,
+            });
+          });
         })}
       >
         <Title>Search</Title>
@@ -62,7 +70,9 @@ const SpotifySearchForm: FunctionComponent<Props> = () => {
             {generateTypeButtons()}
           </RadioGroup> */}
         <Group position="right" mt="md">
-          <Button type="button" onClick={onStartOver}>Clear</Button>
+          <Button variant="outline" type="button" onClick={onStartOver} sx={(theme)=>({backgroundColor:theme.colors.spotifyTileDark})}>
+            Clear
+          </Button>
           <Button type="submit">Search</Button>
         </Group>
       </form>
