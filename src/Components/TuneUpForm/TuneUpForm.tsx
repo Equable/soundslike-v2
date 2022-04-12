@@ -89,6 +89,11 @@ const TuneUpForm: FunctionComponent<Props> = () => {
       });
     }
   }, [trackFeatures]);
+
+  const onStartOver = () => {
+    dispatch({ type: SPOTIFY_CONTEXT_ACTIONS.RESET, payload: null });
+    navigate("/");
+  };
   return (
     <Container className="formContainer">
       <Grid justify="center">
@@ -108,11 +113,16 @@ const TuneUpForm: FunctionComponent<Props> = () => {
                   <Text>{selectedTrack?.name}</Text>
                 </Grid.Col>
                 <Grid.Col span={12}>
+                  Play on:&nbsp;
                   <Anchor
                     href={selectedTrack?.external_urls?.spotify}
                     target="_blank"
                   >
-                    Open In Spotify
+                    Web
+                  </Anchor>
+                  &nbsp;|&nbsp;
+                  <Anchor href={selectedTrack?.uri} target="_blank">
+                    App
                   </Anchor>
                 </Grid.Col>
               </Grid>
@@ -138,7 +148,7 @@ const TuneUpForm: FunctionComponent<Props> = () => {
                   });
                 }
               );
-              navigate('/results');
+              navigate("/results");
             }
           )}
         >
@@ -242,6 +252,7 @@ const TuneUpForm: FunctionComponent<Props> = () => {
                   />
                 </div>
                 <Group position="right" mt="md">
+                  <Button type="button" variant="outline" onClick={onStartOver}>Start Over</Button>
                   <Button type="submit">Search</Button>
                 </Group>
               </Stack>

@@ -4,12 +4,14 @@ import { IconSearch } from "@tabler/icons";
 import { useSpotifyContext } from "Context/SpotifyContext/SpotifyContext";
 import { SPOTIFY_CONTEXT_ACTIONS } from "Context/SpotifyContext/SpotifyContextReducer";
 import { FunctionComponent } from "react";
+import { useNavigate } from "react-router-dom";
 import SpotifyService, {
   SpotifySearchOptions,
 } from "utils/services/SpotifyService";
 
 interface Props {}
 const SpotifySearchForm: FunctionComponent<Props> = () => {
+  const navigate = useNavigate();
   const { state, dispatch } = useSpotifyContext();
   const { token } = state;
   const searchForm = useForm({
@@ -18,6 +20,11 @@ const SpotifySearchForm: FunctionComponent<Props> = () => {
       type: "track",
     } as Partial<SpotifySearchOptions>,
   });
+
+  const onStartOver = () => {
+    dispatch({ type: SPOTIFY_CONTEXT_ACTIONS.RESET, payload: null });
+    navigate("/");
+  };
 
   // Will use for advanced search functionality later
   // const generateTypeButtons = () => {
@@ -31,20 +38,30 @@ const SpotifySearchForm: FunctionComponent<Props> = () => {
   //   return RadioButtons;
   // };
   return (
-    <Container size="xl">
+    <Container
+      size="md"
+      style={{
+        marginTop: 20,
+      }}
+    >
       <form
         onSubmit={searchForm.onSubmit(({ q, type }) => {
           SpotifyService.search(
             { q, type } as SpotifySearchOptions,
             token as string
-          ).then(result => {
-            dispatch({payload: {searchResults: result}, type: SPOTIFY_CONTEXT_ACTIONS.SET_SEARCH_RESULTS})
-          })
+          ).then((result) => {
+            dispatch({
+              payload: { searchResults: result },
+              type: SPOTIFY_CONTEXT_ACTIONS.SET_SEARCH_RESULTS,
+            });
+          });
         })}
       >
         <Title>Search</Title>
         <TextInput
           required
+          size="md"
+          placeholder="What song do you want more of..."
           icon={<IconSearch />}
           {...searchForm.getInputProps("q")}
         />
@@ -53,6 +70,9 @@ const SpotifySearchForm: FunctionComponent<Props> = () => {
             {generateTypeButtons()}
           </RadioGroup> */}
         <Group position="right" mt="md">
+          <Button variant="outline" type="button" onClick={onStartOver} sx={(theme)=>({backgroundColor:theme.colors.spotifyTileDark})}>
+            Clear
+          </Button>
           <Button type="submit">Search</Button>
         </Group>
       </form>
