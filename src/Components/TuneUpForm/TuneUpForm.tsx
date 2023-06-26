@@ -9,9 +9,8 @@ import {
   RangeSlider,
   Stack,
   Text,
-  TextInput,
   Title,
-  Tooltip,
+  Tooltip
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useSpotifyContext } from "Context/SpotifyContext/SpotifyContext";

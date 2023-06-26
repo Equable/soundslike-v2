@@ -1,12 +1,8 @@
 import {
-  Anchor,
-  AspectRatio,
   Button,
   createStyles,
   Grid,
-  Group,
-  Image,
-  Text,
+  Group
 } from "@mantine/core";
 import { AlbumCard } from "Components";
 import { useSpotifyContext } from "Context/SpotifyContext/SpotifyContext";
@@ -14,7 +10,7 @@ import { SPOTIFY_CONTEXT_ACTIONS } from "Context/SpotifyContext/SpotifyContextRe
 import { FunctionComponent } from "react";
 import { useNavigate } from "react-router-dom";
 import { CorePage } from "..";
-import './Recommendations.css'
+import './Recommendations.css';
 interface Props {}
 
 const useStyles = createStyles(() => ({

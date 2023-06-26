@@ -1,4 +1,4 @@
-import { Anchor, AspectRatio, Button, createStyles, Grid, Group, Image, Text } from "@mantine/core";
+import { Anchor, AspectRatio, Button, createStyles, Grid, Image, Text } from "@mantine/core";
 import { useSpotifyContext } from "Context/SpotifyContext/SpotifyContext";
 import { SPOTIFY_CONTEXT_ACTIONS } from "Context/SpotifyContext/SpotifyContextReducer";
 import { FunctionComponent } from "react";
